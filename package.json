@@ -1,0 +1,17 @@
+{
+  "name": "Bazy-danych-Zadanie-1-4-pkt-",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:marcelmalewski/Bazy-danych-Zadanie-1-4-pkt-.git",
+  "author": "Marcel Malewski <mmalewski9@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.13.0"
+  },
+  "devDependencies": {
+    "prettier": "2.8.1"
+  }
+}
