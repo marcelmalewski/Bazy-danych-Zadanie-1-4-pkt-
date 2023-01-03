@@ -2,6 +2,15 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 
+//TODO przetestowac
+//probka na poznie ale usunoac TODO
+// {
+//   "name": "book2",
+//   "price": 14,
+//   "quantity": 6,
+//   "description": "yes"
+// }
+
 router.get("/", async (req, res) => {
   try {
     let filterByQuery = {};
@@ -62,6 +71,21 @@ router.get("/report", async (req, res) => {
 
 router.post("", async (req, res) => {
   try {
+    if (req.body.name === undefined)
+      return res.status(400).send({ message: "Name is required" });
+
+    if (req.body.price === undefined)
+      return res.status(400).send({ message: "Price is required" });
+
+    if (req.body.quantity === undefined)
+      return res.status(400).send({ message: "Quantity is required" });
+
+    if (req.body.description === undefined)
+      return res.status(400).send({ message: "Description is required" });
+
+    if (req.body.state === undefined)
+      return res.status(400).send({ message: "State is required" });
+
     const product = new Product({
       name: req.body.name,
       price: req.body.price,
