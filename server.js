@@ -1,19 +1,36 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("dotenv").config({path: "./config.env"});
+require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
-app.use(cors())
+app.use(cors());
 app.use(express.json());
-app.use(require("./routes/record"));
+const product = require("./routes/product");
 
-const dbo = require("./db/conn");
+require("dotenv").config();
+const dbConnData = {
+  host: process.env.MONGO_HOST || "127.0.0.1",
+  port: process.env.MONGO_PORT || 27017,
+  database: process.env.MONGO_DATABASE || "myDb",
+};
 
-app.listen(port, () => {
-    dbo.connectToServer( function( err, client ) {
-        if (err) console.error(err);
+const mongoose = require("mongoose");
+mongoose
+  .connect(
+    `mongodb://${dbConnData.host}:${dbConnData.port}/${dbConnData.database}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then((response) => {
+    app.use("/products", product);
+
+    console.log(
+      `Connected to MongoDB. Database name: "${response.connections[0].name}"`
+    );
+    app.listen(port, () => {
+      console.log(`API server listening at http://localhost:${port}`);
     });
-    console.log(`Server is running on port ${port}`);
-});
-
-
+  })
+  .catch((error) => console.error("Error connecting to MongoDB", error));
