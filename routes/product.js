@@ -2,15 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 
-//TODO przetestowac
-//probka na poznie ale usunoac TODO
-// {
-//   "name": "book2",
-//   "price": 14,
-//   "quantity": 6,
-//   "description": "yes"
-// }
-
 router.get("/", async (req, res) => {
   try {
     let filterByQuery = {};
@@ -159,7 +150,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 const handleCode500 = (err, res) => {
-  return res.status(500).send({ message: err.message });
+  return res.status(500).send({ error: err.message });
 };
 
 module.exports = router;
