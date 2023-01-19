@@ -50,7 +50,7 @@ router.get("/report", async (req, res) => {
           _id: 0,
           name: 1,
           quantity: 1,
-          total_price: { $multiply: ["$price", "$quantity"] },
+          total_price: { $round : [{ $multiply: ["$price", "$quantity"] }, 2] },
         },
       },
     ]);
