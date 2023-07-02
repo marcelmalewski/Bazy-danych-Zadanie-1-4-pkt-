@@ -1,3 +1,5 @@
+# Basic api with mongodb
+
 ### Przykładowe config.env:
 ```
 MONGO_URI=mongodb://localhost:27017/mydb
